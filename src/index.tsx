@@ -1,12 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './App_fun';
 import reportWebVitals from './reportWebVitals';
+import { AppStateProvider } from './AppState';
+
+// // -------------------------------------
+// const aaContext = {name:'hello'}
+
+// export const appContext = React.createContext(aaContext)
+// // -------------------------------------
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <appContext.Provider value = {aaContext}> */}
+    <AppStateProvider>
+      <App />
+    </AppStateProvider>
+    {/* </appContext.Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -2,6 +2,7 @@ import { ReactComponent } from '*.svg';
 import React from 'react';
 import styles from './ShoppingCart.module.css';
 import { FiShoppingCart } from 'react-icons/fi';
+import { appContext } from '../AppState';
 
 interface Props{
 
@@ -29,15 +30,22 @@ class ShoppingCart extends React.Component<Props,State>{
 
     render(){
         return(
-            <div className = {styles.cartContainer}>
-                <button className = {styles.button} onClick = {this.handleClick}> <FiShoppingCart /> <span> Shopping Cart 2 (item) </span></button>
-                <div className = {styles.cartDropDown} style = {{display: this.state.isOpen?"none":"block"}}>
-                    <ul>
-                        <li>robot 1</li>
-                        <li>robot 2</li>
-                    </ul>
+            <appContext.Consumer>
+                {(value) => {
+                return (
+                <div className = {styles.cartContainer}>
+                    <button className = {styles.button} onClick = {this.handleClick}> <FiShoppingCart /> <span> Shopping Cart {value.shoppingCart.items.length} (item) </span></button>
+                    <div className = {styles.cartDropDown} style = {{display: this.state.isOpen?"none":"block"}}>
+                        <ul>
+                            {value.shoppingCart.items.map(v => 
+                                <li> {v.name} </li>
+                            )}
+                        </ul>
+                    </div>
                 </div>
-            </div>
+                );
+                }} 
+            </appContext.Consumer>
         );
     }
 }
