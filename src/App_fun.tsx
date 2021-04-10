@@ -4,6 +4,7 @@ import logo from './assets/icons/logo.svg';
 import styles from './App.module.css';//In TS, before using, css MUST be declare first
 // import robots from './moxdata/robots.json';
 import Robot from './components/Robots';
+import RobotsDiscount from './components/RobotsDiscount';
 import ShoppingCart from './components/ShoppingCart';
 
 // -------------------------------------
@@ -54,8 +55,9 @@ const App: React.FC<Props> = (props) => {
       {(error !=='' || !error) && <div> {error} </div>}
       { !loading ?
       <div className = {styles.robotList}>
-        {robotGallery.map((v,i) =>
-          <Robot id = {v.id} name = {v.name} email = {v.email}/>
+        {robotGallery.map((v,i) =>(i % 2===0?
+          <Robot id = {v.id} name = {v.name} email = {v.email}/>:
+          <RobotsDiscount id = {v.id} name = {v.name} email = {v.email}/>)
         )}
       {/* the arrow function body can't be wrapped by brace */}
       </div>:
